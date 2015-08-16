@@ -1,6 +1,7 @@
 #include<iostream>
 #include<fstream>
 #include<vector>
+#include"sort.h"
 
 using namespace std;
 
@@ -19,5 +20,7 @@ int main(int argc, char **argv) {
 		nums.push_back(num);
 	}
 	in.close();
+	sort s;
+	s.insertionSort(nums);
 	return 1;
 }
