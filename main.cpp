@@ -30,7 +30,7 @@ int main(int argc, char **argv) {
 	}
 	print<double>(nums);
 	in.close();
-	sort s;
+	sort<double> s;
 	s.insertionSort(nums);
 	print<double>(nums);
 	return 1;
