@@ -6,9 +6,9 @@
 
 using namespace std;
 
-template <class T>
 class sort {
-	void insertionSort(vector<T>& vec);
+public:
+	void insertionSort(vector<double>& vec);
 };
 
 
