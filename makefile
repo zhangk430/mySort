@@ -1,5 +1,14 @@
-sort: main.cpp
-	g++ -o sort main.cpp
-.PHONY: clean
-clean:
-	rm sort 
+IDIR=.
+CC=g++
+CFLAGS=-I$(IDIR)
+
+DEPS=sort.h
+OBJ=main.o
+
+%.o: %.c $(DEPS)
+	$(CC) -c -o $@ $< $(CFLAGS)
+sort : $(OBJ)
+	$(CC) -o $@ $^ $(CFLAGS)
+.PHONY : clean
+clean :
+	-rm -f *.o *~ core

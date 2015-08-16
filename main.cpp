@@ -31,7 +31,7 @@ int main(int argc, char **argv) {
 	print<double>(nums);
 	in.close();
 	sort<double> s;
-	s.insertionSort(nums);
+	s.mergeSort(nums);
 	print<double>(nums);
 	return 1;
 }
