@@ -3,7 +3,7 @@
 #include<vector>
 #include<string>
 #include<time.h>
-#include"sort.h"
+#include"intro2alg.h"
 
 using namespace std;
 
@@ -17,7 +17,7 @@ void print(vector<T>& vec) {
 
 void help(char *argv) {
 	cout << "Usage: " << argv << " filename <command>\n";
-	cout << "command: -i use insertion sort\n         -m use merge sort\n";
+	cout << "command: -i use insertion sort\n         -m use merge sort\n       -q use quick sort\n";
 }
 
 int main(int argc, char **argv) {
@@ -26,7 +26,7 @@ int main(int argc, char **argv) {
 		return 0;
 	}
 	string cmd(argv[2]);
-	if (cmd != "-i" && cmd != "-m") {
+	if (cmd != "-i" && cmd != "-m" && cmd != "-q") {
 		help(argv[0]);
 		return 0;
 	}
@@ -43,7 +43,7 @@ int main(int argc, char **argv) {
 		nums.push_back(num);
 	}
 	in.close();
-	std::cout << "Before sorting: ";
+	cout << "Entire Array: ";
 	print<double>(nums);
 	sort<double> s;
 	clock_t tStart = clock();
@@ -51,9 +51,15 @@ int main(int argc, char **argv) {
 		s.insertionSort(nums);
 	else if (cmd == "-m")
 		s.mergeSort(nums);
+	else if (cmd == "-q")
+		s.quicksort(nums, 0, nums.size() - 1);
+/*	Intro2Alg i2a;
+	int s, e;
+	double max = i2a.maximalSubarray(nums, s, e);*/
 	clock_t tEnd = clock();
 	cout << "After sorting: ";
 	print<double>(nums);
+//	cout << "Maximal Subarray: " << max << " starting at " << s << " ending at " << e << endl;
 	cout << "Time taken " << (double)(tEnd - tStart)/CLOCKS_PER_SEC*1000 << " ms\n";
 	return 1;
 }

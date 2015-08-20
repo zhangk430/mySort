@@ -2,13 +2,15 @@ IDIR=.
 CC=g++
 CFLAGS=-I$(IDIR)
 
-DEPS=sort.h
-OBJ=main.o
+DEPS=sort.h intro2alg.h
+OBJ=main.o intro2alg.o
 
-%.o: %.c $(DEPS)
-	$(CC) -c -o $@ $< $(CFLAGS)
-bin/sort : $(OBJ)
-	$(CC) -o $@ $^ $(CFLAGS)
+bin/sort : $(OBJ) 
+	$(CC) -o bin/sort $(OBJ) $(CFLAGS)
+main.o: main.cpp $(DEPS)
+	$(CC) -c main.cpp
+intro2alg.o: intro2alg.cpp $(DEPS)
+	$(CC) -c intro2alg.cpp
 .PHONY : clean
 clean :
 	-rm -f *.o *~ core
