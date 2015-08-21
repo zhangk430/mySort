@@ -16,12 +16,13 @@ void print(vector<T>& vec) {
 }
 
 void help(char *argv) {
-	cout << "Usage: " << argv << " filename <command>\n";
+	cout << "Usage: " << argv << " filename <command> <order>\n";
 	cout << "command: -i use insertion sort\n         -m use merge sort\n       -q use quick sort\n       -h use heap sort\n";
+	cout << "order: 0: ascending 1: descending default: ascending\n";
 }
 
 int main(int argc, char **argv) {
-	if (argc != 3) {
+	if (argc != 3 && argc != 4) {
 		help(argv[0]);
 		return 0;
 	}
@@ -30,6 +31,11 @@ int main(int argc, char **argv) {
 		help(argv[0]);
 		return 0;
 	}
+	if (argc == 4 && *argv[3] != '0' && *argv[3] != '1') {
+		help(argv[0]);
+		return 0;
+	}
+	bool order = argc == 4 ? *argv[3] - '0' : 0;
 	ifstream in(argv[1]);
 	if (!in.is_open()) {
 		cout << argv[1] << " not exist!\n";
@@ -45,16 +51,16 @@ int main(int argc, char **argv) {
 	in.close();
 	cout << "Entire Array: ";
 	print<double>(nums);
-	sort<double> s;
+	mySort<double> s;
 	clock_t tStart = clock();
 	if (cmd == "-i")
-		s.insertionSort(nums);
+		s.insertionSort(nums, [&order](const double& t1, const double& t2){return t1 < t2 ^ order;});
 	else if (cmd == "-m")
-		s.mergeSort(nums);
+		s.mergeSort(nums, [&order](const double& t1, const double& t2){return t1 < t2 ^ order;});
 	else if (cmd == "-q")
-		s.quicksort(nums, 0, nums.size() - 1);
+		s.quicksort(nums, 0, nums.size() - 1, [&order](const double& t1, const double& t2){return t1 < t2 ^ order;});
 	else if (cmd == "-h")
-		s.heapsort(nums);
+		s.heapsort(nums, [&order](const double& t1, const double& t2){return t1 < t2 ^ order;});
 /*	Intro2Alg i2a;
 	int s, e;
 	double max = i2a.maximalSubarray(nums, s, e);*/

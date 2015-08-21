@@ -118,7 +118,7 @@ public:
 		}
 	}
 	void print() {
-		for (T n : vec)
+		for (T& n : vec)
 			cout << n << " ";
 		cout << "\n";
 	}
