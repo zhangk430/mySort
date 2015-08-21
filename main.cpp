@@ -17,7 +17,7 @@ void print(vector<T>& vec) {
 
 void help(char *argv) {
 	cout << "Usage: " << argv << " filename <command>\n";
-	cout << "command: -i use insertion sort\n         -m use merge sort\n       -q use quick sort\n";
+	cout << "command: -i use insertion sort\n         -m use merge sort\n       -q use quick sort\n       -h use heap sort\n";
 }
 
 int main(int argc, char **argv) {
@@ -26,7 +26,7 @@ int main(int argc, char **argv) {
 		return 0;
 	}
 	string cmd(argv[2]);
-	if (cmd != "-i" && cmd != "-m" && cmd != "-q") {
+	if (cmd != "-i" && cmd != "-m" && cmd != "-q" && cmd != "-h") {
 		help(argv[0]);
 		return 0;
 	}
@@ -53,6 +53,8 @@ int main(int argc, char **argv) {
 		s.mergeSort(nums);
 	else if (cmd == "-q")
 		s.quicksort(nums, 0, nums.size() - 1);
+	else if (cmd == "-h")
+		s.heapsort(nums);
 /*	Intro2Alg i2a;
 	int s, e;
 	double max = i2a.maximalSubarray(nums, s, e);*/

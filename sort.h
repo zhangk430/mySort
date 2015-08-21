@@ -3,6 +3,7 @@
 
 #include<vector>
 #include<iostream>
+#include"heap.h"
 
 using namespace std;
 
@@ -41,6 +42,21 @@ public:
 			int q = partition(vec, p, r);
 			quicksort(vec, p, q - 1);
 			quicksort(vec, q + 1, r);
+		}
+	}
+	void heapsort(vector<T>& vec) {
+		myHeap<T> h(vec, heap_type::MIN_HEAP);
+		h.print();
+		h.buildMaxHeap();
+		cout << "building heap: ";
+		h.print();
+		h.remove(5);
+		cout << "After insertion: ";
+		h.print();		
+		vec.clear();
+		while (h.size()) {
+			T max = h.extractMax();
+			vec.push_back(max);
 		}
 	}
 private:

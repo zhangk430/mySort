@@ -1,8 +1,8 @@
 IDIR=.
-CC=g++
+CC=g++ -std=c++11
 CFLAGS=-I$(IDIR)
 
-DEPS=sort.h intro2alg.h
+DEPS=sort.h intro2alg.h heap.h
 OBJ=main.o intro2alg.o
 
 bin/sort : $(OBJ) 
