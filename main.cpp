@@ -52,15 +52,32 @@ int main(int argc, char **argv) {
 	cout << "Entire Array: ";
 	print<double>(nums);
 	mySort<double> s;
+	mySort<double, greater<double>> s_greater; 
 	clock_t tStart = clock();
-	if (cmd == "-i")
-		s.insertionSort(nums, [&order](const double& t1, const double& t2){return t1 < t2 ^ order;});
-	else if (cmd == "-m")
-		s.mergeSort(nums, [&order](const double& t1, const double& t2){return t1 < t2 ^ order;});
-	else if (cmd == "-q")
-		s.quicksort(nums, 0, nums.size() - 1, [&order](const double& t1, const double& t2){return t1 < t2 ^ order;});
-	else if (cmd == "-h")
-		s.heapsort(nums, [&order](const double& t1, const double& t2){return t1 < t2 ^ order;});
+	if (cmd == "-i") {
+		if (!order)
+			s.insertionSort(nums);
+		else
+			s_greater.insertionSort(nums);
+	}
+	else if (cmd == "-m") {
+		if (!order)
+			s.mergeSort(nums);
+		else
+			s_greater.mergeSort(nums);
+	}
+	else if (cmd == "-q") {
+		if (!order)
+			s.quicksort(nums, 0, nums.size() - 1);
+		else		
+			s_greater.quicksort(nums, 0, nums.size() - 1);
+	}
+	else if (cmd == "-h") {
+		if (!order)
+			s.heapsort(nums);
+		else
+			s_greater.heapsort(nums);
+	}
 /*	Intro2Alg i2a;
 	int s, e;
 	double max = i2a.maximalSubarray(nums, s, e);*/

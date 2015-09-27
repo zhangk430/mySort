@@ -4,8 +4,6 @@
 #include<iostream>
 #include<vector>
 
-using namespace std;
-
 enum heap_type {
 	MIN_HEAP,
 	MAX_HEAP
@@ -14,10 +12,10 @@ enum heap_type {
 template<class T>
 class myHeap {
 	heap_type type;
-	vector<T> vec;
+	std::vector<T> vec;
 public:
 	myHeap(){ type = heap_type::MAX_HEAP; }
-	myHeap(const vector<T>& input, heap_type ht = heap_type::MAX_HEAP) {
+	myHeap(const std::vector<T>& input, heap_type ht = heap_type::MAX_HEAP) {
 		for (T n : input)
 			vec.push_back(n);
 		type = ht;
@@ -48,7 +46,7 @@ public:
 				if (r >= 0 && vec[r] > vec[largest])
 					largest = r;
 				if (largest != i) {
-					swap(vec[i], vec[largest]);
+					std::swap(vec[i], vec[largest]);
 					maxHeapify(largest);
 				}
 				break;
@@ -58,7 +56,7 @@ public:
 				if (r >= 0 && vec[r] < vec[largest])
 					largest = r;
 				if (largest != i) {
-					swap(vec[i], vec[largest]);
+					std::swap(vec[i], vec[largest]);
 					maxHeapify(largest);
 				}
 				break;
@@ -73,13 +71,13 @@ public:
 		switch(type) {
 			case MAX_HEAP:
 				if (vec[i] > vec[p]) {
-					swap(vec[i], vec[p]);
+					std::swap(vec[i], vec[p]);
 					floatUp(p);
 				}
 				break;
 			case MIN_HEAP:
 				if (vec[i] < vec[p]) {
-					swap(vec[i], vec[p]);
+					std::swap(vec[i], vec[p]);
 					floatUp(p);
 				}
 				break;
@@ -116,11 +114,6 @@ public:
 			floatUp(i);
 			maxHeapify(i);
 		}
-	}
-	void print() {
-		for (T& n : vec)
-			cout << n << " ";
-		cout << "\n";
 	}
 };
 
